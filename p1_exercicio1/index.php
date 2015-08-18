@@ -22,5 +22,4 @@ echo 'g:'. $g .'<br>';
 echo 'h:'. $h .'<br>';
 echo 'i:'. $i .'<br>';
 echo 'j:'. $j .'<br>';
-
 ?>
