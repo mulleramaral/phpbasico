@@ -18,6 +18,7 @@ function validaUsuario($usuarios) {
     foreach ($usuarios as $indice => $usuario) {
         if ($usuario["usuario"] == $_POST["usuario"] && $usuario["senha"] == $_POST["senha"]) {
             $_SESSION["logado"] = true;
+            $_SESSION["usuario"] = $_POST["usuario"];
             header("location: inserir.php");
         } else {
             $usuario = False;
@@ -33,7 +34,7 @@ function validaUsuario($usuarios) {
 //Sair
 if (isset($_GET["sair"])) {
     unset($_SESSION["logado"]);
-    header("location:arearestrita.php");
+    header("location:index.php");
 }
 
 //Gravando
@@ -41,7 +42,8 @@ if (isset($_POST['codigo']) && isset($_POST['nome'])) {
 
     $clientes[] = array(
         "codigo" => $_POST['codigo'],
-        "nome" => $_POST['nome']
+        "nome" => $_POST['nome'],
+        "email" => $_POST['email']
     );
 
     setcookie("clientes",serialize($clientes));
@@ -52,7 +54,7 @@ if (isset($_POST['codigo']) && isset($_POST['nome'])) {
 
 <?php if (!isset($_SESSION["logado"])): ?>
     <form action="inserir.php" method="POST">
-        <h2>Você deve estar logado para inserir</h2>
+        <h2>Efetuar Login</h2>
         <fieldset>
             <legend>
                 Efetuar login
@@ -66,13 +68,16 @@ if (isset($_POST['codigo']) && isset($_POST['nome'])) {
     </form>
 <?php else: ?>
 
-    <h1>Cadastro de clientes</h1>
+     <p>Seja bem Vindo <?= $_SESSION["usuario"] ?></p>
+    <h1>Inserindo clientes</h1>
 
+    
     <form action="inserir.php" method="post">
         <fieldset>
             <legend>Inserir Cliente</legend>
             <label>Código: <input type="text" name="codigo"></label>
             <label>Nome: <input type="text" name="nome"></label>
+            <label>Email: <input type="email" name="email"></label>
         </fieldset>
         <br/>
         <input type="submit" name="submit" value="Enviar">

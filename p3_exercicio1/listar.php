@@ -13,6 +13,7 @@ $clientes = isset($_COOKIE['clientes']) ? unserialize($_COOKIE['clientes']) : ""
                 <tr>
                     <th>Código</th>
                     <th>Nome</th>
+                    <th>Email</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,6 +21,7 @@ $clientes = isset($_COOKIE['clientes']) ? unserialize($_COOKIE['clientes']) : ""
                     <tr>
                         <td><?= $clientes[$i]['codigo']; ?></td>
                         <td><?= $clientes[$i]['nome']; ?></td>
+                        <td><?= $clientes[$i]['email'];?></td>
                     </tr>
                 <?php endfor; ?>
             </tbody>
